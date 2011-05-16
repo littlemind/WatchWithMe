@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  cinema: 
+  screening_start: 2011-05-16
+  screening_end: 2011-05-16
+
+two:
+  title: MyString
+  cinema: 
+  screening_start: 2011-05-16
+  screening_end: 2011-05-16
