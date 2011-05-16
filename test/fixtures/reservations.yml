@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  organizer: 
+  movie: 
+  participant: 
+  ticket_prize: 9.99
+  screening: 2011-05-16 21:31:17
+  cinema_room: 1
+
+two:
+  organizer: 
+  movie: 
+  participant: 
+  ticket_prize: 9.99
+  screening: 2011-05-16 21:31:17
+  cinema_room: 1
