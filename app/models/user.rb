@@ -12,6 +12,6 @@ class User < ActiveRecord::Base
   has_many :participated_reservations, :class_name => "Reservation",:through => :tickets, :source => :reservation
   
   def to_param
-    name
+    username
   end
 end
