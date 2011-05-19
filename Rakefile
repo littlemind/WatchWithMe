@@ -4,4 +4,4 @@
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
-WatchWithYou::Application.load_tasks
+WatchWithMe::Application.load_tasks

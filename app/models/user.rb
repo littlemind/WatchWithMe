@@ -10,4 +10,8 @@ class User < ActiveRecord::Base
   has_many :organized_reservations, :class_name => "Reservation", :foreign_key => "organizer_id"
   has_many :tickets, :class_name => "Ticket", :foreign_key => "participant_id" 
   has_many :participated_reservations, :class_name => "Reservation",:through => :tickets, :source => :reservation
+  
+  def to_param
+    name
+  end
 end
