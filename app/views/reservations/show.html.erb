@@ -1,0 +1,17 @@
+<h1>Reservations for <%= @movie.title %></h1>
+organized by <%= link_to @organizer.username, @organizer %>
+
+
+<div id="tickets">
+	<h2>Tickets</h2>
+	<p><%= link_to "edit", edit_reservation_path %></p>
+	<ol>
+		<% for ticket in @reservation.tickets %>
+			<li>
+				<div id="Ticket">
+					Ticket | <%= link_to "reserve", ticket_path(:ticket_id => ticket), :method => :put, :action => "update" %>
+				</div>
+			</li>
+		<% end %>
+	</ol>
+</div>

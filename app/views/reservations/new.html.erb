@@ -1,0 +1,14 @@
+<h2>Add new reservation</h2>
+<%= form_for @reservation do |f| %>
+	<div class="field">
+		<%= f.label :movie %><br />
+		<%= f.collection_select(:movie_id, Movie.all, :id, :title) %>
+  </div>
+	<div class="field">
+		<%= f.label :tickets %>
+		<%= text_field_tag(:ticket_count) %>
+	</div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
