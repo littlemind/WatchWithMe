@@ -7,13 +7,24 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
+	<%= debug params %>
+	<%= debug @user %>
+	<% if flash[:notice] %>
+		<p class="notice"><%= flash[:notice] %></p>
+	<% end %>
+	<% if flash[:error] %>
+		<p class="error"><%= flash[:error] %></p>
+	<% end %>
+	
+	
 	<div id="user-header">
 		<% if user_signed_in? %>
-			You are signed in as <%= current_user.username  %>
+			You are signed in as <%= current_user.username %>
 		<% else %>
-			You are not signed in. To change stuff pleas sign in <%= link_to 'here', new_user_session_path %>
+			You are not signed in. To change stuff please <%= link_to 'sign in', new_user_session_path %> or <%= link_to "sign up a new account", new_user_registration_path %>
 		<% end %>
 	</div>
+	
 
 
 <%= yield %>

@@ -1,7 +1,11 @@
 WatchWithMe::Application.routes.draw do
-  devise_for :users
-  resources :users, :only => :show
-
+    devise_for :users
+  resources :users, :only => :show do
+    resources :reservations, :only => [:show, :index]
+  end
+  resources :tickets
+  resources :reservations, :only => [:new, :create, :edit, :update]
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -59,5 +63,5 @@ WatchWithMe::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id(.:format)))'
   
-  root :to => "home#index"
+  root :to => "reservations#index"
 end

@@ -1,0 +1,9 @@
+<h1>Reservations#edit</h1>
+
+
+<%= form_for [@reservation] do |f| %>
+	<%= f.fields_for :tickets do |builder| %>
+		<%= builder.text_field :participant_id  %>
+	<% end %>
+	<%= f.submit %>
+<% end %>
