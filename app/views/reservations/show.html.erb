@@ -1,15 +1,39 @@
 <h1>Reservations for <%= @movie.title %></h1>
 organized by <%= link_to @organizer.username, @organizer %>
+<div id="reservation-details">
+	<%= image_tag "http://lorempixum.com/g/300/450/" %>
+		<p>
+			<strong>Movie title:</strong> <%= @movie.title %>
+		</p>
+		<p>
+			<strong>Screening date:</strong> <%= @reservation.screening.strftime '%m.%d.%Y' %> (in <%= distance_of_time_in_words( @reservation.screening, Time.now)   %>)
+		</p>
+		<p>
+			<strong>Screening time:</strong> <%= @reservation.screening.strftime '%H.%M' %>
+		</p>
+</div>
 
 
 <div id="tickets">
 	<h2>Tickets</h2>
-	<p><%= link_to "edit", edit_reservation_path %></p>
+	
+	<% if @organizer == current_user %>
+		<%= link_to "edit", edit_reservation_path %>
+	<% end %>
 	<ol>
 		<% for ticket in @reservation.tickets %>
 			<li>
 				<div id="Ticket">
-					Ticket | <%= link_to "reserve", ticket_path(:ticket_id => ticket), :method => :put, :action => "update" %>
+					Ticket | 
+					<% if ticket.participant %>
+						<%= link_to ticket.participant.username, ticket.participant %> 
+						<% if current_user == ticket.participant %>
+							(<%= link_to "cancel", ticket, :method => :delete %>)
+						<% end %>
+					<% else %>
+						not reserved
+						(<%= link_to "reserve", tickets_path(:ticket_id => ticket), :method => :post, :action => "create" %>)
+					<% end %>
 				</div>
 			</li>
 		<% end %>

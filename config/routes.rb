@@ -1,5 +1,6 @@
 WatchWithMe::Application.routes.draw do
-    devise_for :users
+  devise_for :users
+  resources :movies
   resources :users, :only => :show do
     resources :reservations, :only => [:show, :index]
   end
@@ -63,5 +64,5 @@ WatchWithMe::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id(.:format)))'
   
-  root :to => "reservations#index"
+  root :to => "info#main"
 end

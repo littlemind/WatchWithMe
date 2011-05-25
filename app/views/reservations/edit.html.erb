@@ -1,9 +1,9 @@
-<h1>Reservations#edit</h1>
+<h1>Edit the reservation <%= link_to @reservation.movie.title, @reservation.movie %></h1>
 
 
 <%= form_for [@reservation] do |f| %>
 	<%= f.fields_for :tickets do |builder| %>
-		<%= builder.text_field :participant_id  %>
+		<%= builder.text_field :participant_id  %><br>
 	<% end %>
 	<%= f.submit %>
 <% end %>
