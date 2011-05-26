@@ -3,7 +3,7 @@
 
 <%= form_for [@reservation] do |f| %>
 	<%= f.fields_for :tickets do |builder| %>
-		<%= builder.text_field :participant_id  %><br>
+		<%= builder.collection_select(:participant_id, User.all, :id, :username, :include_blank => true) %><br>
 	<% end %>
 	<%= f.submit %>
 <% end %>
