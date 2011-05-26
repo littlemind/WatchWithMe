@@ -32,3 +32,4 @@ gem 'sqlite3'
 
 gem 'devise'
 gem "nifty-generators", :group => :development
+gem "hirb", :group => :development

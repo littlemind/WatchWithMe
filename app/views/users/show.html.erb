@@ -20,7 +20,7 @@
 		<h2> Upcoming Movies </h2>
 		<ul>
 			<% @upcoming_reservations.each do |r| %>
-				<li><%= link_to r.movie.title, [@user,r] %> (<%= pluralize r.tickets.count, "ticket" %>/ <%=  %> )</li>
+				<li><%= link_to r.movie.title, [@user,r] %> (<%= pluralize r.tickets.count, "ticket" %> )</li>
 			<% end %>
 		</ul>
 	</div>
