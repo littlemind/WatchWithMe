@@ -7,9 +7,18 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
   
-  has_many :organized_reservations, :class_name => "Reservation", :foreign_key => "organizer_id"
-  has_many :tickets, :class_name => "Ticket", :foreign_key => "participant_id"
-  has_many :participated_reservations, :class_name => "Reservation",:through => :tickets, :source => :reservation, :uniq => true #:select => "DISTINCT reservations.*"
+  has_many :organized_reservations, 
+    :class_name => "Reservation", 
+    :foreign_key => "organizer_id",
+    :order => "reserved_at ASC"
+  has_many :participated_reservations, 
+    :class_name => "Reservation",
+    :through => :tickets, 
+    :source => :reservation, 
+    :uniq => true, #:select => "DISTINCT reservations.*"
+    :order => "reserved_at ASC"
+  has_many :tickets, :class_name => "Ticket", 
+    :foreign_key => "participant_id"
   
   
   validates_uniqueness_of :username, :case_sensitive => false, :allow_blank => false
@@ -24,7 +33,7 @@ class User < ActiveRecord::Base
   
   def reservations
     #Reservation.all(:joins => {:participants => :tickets}, :conditions => {:tickets => {:participant_id => id}},:conditions => {:organizer_id => id})
-    participated_reservations + organized_reservations
+    return :participated_reservations + :organized_reservations
   end
   
   

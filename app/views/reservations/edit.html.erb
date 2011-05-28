@@ -2,8 +2,14 @@
 
 
 <%= form_for [@reservation] do |f| %>
-	<%= f.fields_for :tickets do |builder| %>
-		<%= builder.collection_select(:participant_id, User.all, :id, :username, :include_blank => true) %><br>
-	<% end %>
+	<h2>Tickets:</h2>
+	<ol>
+		<%= f.fields_for :tickets do |builder| %>
+			<li>
+				Ticket |
+				<%= builder.collection_select(:participant_id, User.all, :id, :username, :include_blank => true) %><br>
+			</li>
+		<% end %>
+	</ol>
 	<%= f.submit %>
 <% end %>

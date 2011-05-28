@@ -5,8 +5,8 @@
 		<%= f.collection_select(:movie_id, Movie.all, :id, :title) %>
   </div>
 	<div class="field">
-		<%= f.label :screening %><br>
-		<%= f.datetime_select :screening ,:discard_year => true, :minute_step => 5%>
+		<%= f.label :reserved_at %><br>
+		<%= f.datetime_select :reserved_at ,:discard_year => true, :minute_step => 5%>
 	</div>
 	<div class="field">
 		<%= f.label :tickets %><br>
