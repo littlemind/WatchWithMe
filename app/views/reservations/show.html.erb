@@ -1,15 +1,15 @@
-<h1>Reservations for <%= @movie.title %></h1>
+<h1>Reservations for <%= @reservation.title %></h1>
 organized by <%= link_to @organizer.username, @organizer %>
 <div id="reservation-details">
 	<%= image_tag "http://lorempixum.com/g/300/450/" %>
 		<p>
-			<strong>Movie title:</strong> <%= @movie.title %>
+			<strong>Movie title:</strong> <%= @reservation.title %>
 		</p>
 		<p>
-			<strong>Screening date:</strong> <%= @reservation.screening.strftime '%m.%d.%Y' %> (in <%= distance_of_time_in_words( @reservation.screening, Time.now)   %>)
+			<strong>Screening date:</strong> <%= @reservation.reserved_at.strftime '%d.%m.%Y' %> (in <%= distance_of_time_in_words( @reservation.reserved_at, Time.now)   %>)
 		</p>
 		<p>
-			<strong>Screening time:</strong> <%= @reservation.screening.strftime '%H.%M' %>
+			<strong>Screening time:</strong> <%= @reservation.reserved_at.strftime '%H:%M' %>
 		</p>
 </div>
 

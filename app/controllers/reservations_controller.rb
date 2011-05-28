@@ -3,8 +3,7 @@ class ReservationsController < ApplicationController
   before_filter :authenticate_user!
   
   def show
-    @reservation = Reservation.find(params[:id], :include => [:participants, :organizer])
-    @movie = @reservation.movie
+    @reservation = Reservation.find(params[:id], :include => [:participants, :organizer,:movie])
     @tickets = @reservation.tickets
     @organizer = @reservation.organizer
   end
@@ -13,8 +12,6 @@ class ReservationsController < ApplicationController
     if user_signed_in?
       @participated_reservations = current_user.participated_reservations.all(:joins => [:tickets,:movie], :select => ["reservations.*, count(DISTINCT tickets.id) as tickets_count","reservations.*, movies.title as movie_title"],:group => "reservations.id")
       @organized_reservations = current_user.organized_reservations.all(:joins => [:tickets,:movie], :select => ["reservations.*, count(DISTINCT tickets.id) as tickets_count","reservations.*, movies.title as movie_title"],:group => "reservations.id")
-      
-      
     else
       redirect_to new_user_session_path
     end
