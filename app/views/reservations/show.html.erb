@@ -15,10 +15,6 @@ organized by <%= link_to @organizer.username, @organizer %>
 
 <div id="tickets">
 	<h2>Tickets</h2>
-	
-	<% if @organizer == current_user %>
-		<%= link_to "edit", edit_reservation_path %>
-	<% end %>
 	<ol>
 		<% for ticket in @reservation.tickets %>
 			<li>
@@ -31,10 +27,15 @@ organized by <%= link_to @organizer.username, @organizer %>
 						<% end %>
 					<% else %>
 						not reserved
-						(<%= link_to "reserve", tickets_path(:ticket_id => ticket), :method => :post, :action => "create" %>)
+						(<%= link_to "reserve", tickets_path(:ticket_id => ticket), :action => "create", :controller => "tickets", :method => :post %>)
 					<% end %>
 				</div>
 			</li>
 		<% end %>
 	</ol>
 </div>
+
+<% if @organizer == current_user %>
+	<%= link_to "Edit", edit_reservation_path %> |
+	
+<% end %>

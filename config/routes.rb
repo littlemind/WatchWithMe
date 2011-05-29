@@ -4,7 +4,7 @@ WatchWithMe::Application.routes.draw do
   resources :users, :only => :show do
     resources :reservations, :only => [:show, :index]
   end
-  resources :tickets
+  resources :tickets, :only => [:create, :destroy]
   resources :reservations, :only => [:new, :create, :edit, :update]
   
   # The priority is based upon order of creation:

@@ -1,0 +1,21 @@
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Reserved for</th>
+		<th>@</th>
+    <th>Tickets</th>
+  </tr>
+  <% for reservation in reservations %>
+    <tr>
+      <td><%= link_to reservation.movie_title, [current_user,reservation] %></td>
+      <td><%= reservation.reserved_at.to_time %></td>
+			<td><%= reservation.cinema_room %></td>
+      <td><%= pluralize reservation.tickets_count, "ticket" %></td>
+      <% if reservation.organizer == current_user %>
+				<td><%= link_to "Show", [current_user,reservation] %></td>
+	      <td><%= link_to "Edit", edit_reservation_path(reservation) %></td>
+	      <td><%= link_to "Destroy", [current_user,reservation], :confirm => 'Are you sure?', :method => :delete %></td>
+			<% end %>
+    </tr>
+  <% end %>
+</table>
