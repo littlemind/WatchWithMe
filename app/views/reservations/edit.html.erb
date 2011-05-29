@@ -3,13 +3,11 @@
 
 <%= form_for [@reservation] do |f| %>
 	<h2>Tickets:</h2>
-	<ol>
+	<ol class="fields">
 		<%= f.fields_for :tickets do |builder| %>
-			<li>
-				Ticket |
-				<%= builder.collection_select(:participant_id, User.all, :id, :username, :include_blank => true) %><br>
-			</li>
+			<%= render "ticket_fields", :f => builder %>
 		<% end %>
+		<%= link_to_add_fields("Add Ticket", f, :tickets) %><br />
 	</ol>
 	<%= f.submit %>
 <% end %>

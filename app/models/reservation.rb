@@ -2,7 +2,8 @@ class Reservation < ActiveRecord::Base
   belongs_to :organizer, :class_name => "User"
   belongs_to :movie
   has_many :tickets,
-    :order => "participant_id DESC"
+    :order => "participant_id DESC"#,
+#    :dependent => :destroy
   has_many :participants, :class_name => "User", :source => :participant, :through => :tickets
   
   delegate :title, :to => :movie

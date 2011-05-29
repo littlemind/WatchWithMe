@@ -5,12 +5,13 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :username, :email, :password, :password_confirmation, :remember_me
   
   has_many :organized_reservations, 
     :class_name => "Reservation", 
     :foreign_key => "organizer_id",
-    :order => "reserved_at ASC"
+    :order => "reserved_at ASC",
+    :dependent => :destroy
   has_many :participated_reservations, 
     :class_name => "Reservation",
     :through => :tickets, 
@@ -22,7 +23,7 @@ class User < ActiveRecord::Base
   
   
   validates_uniqueness_of :username, :case_sensitive => false, :allow_blank => false
-  
+  validates_presence_of :username, :message => "can't be blank"
   def to_param #overridden
     username
   end
@@ -33,7 +34,7 @@ class User < ActiveRecord::Base
   
   def reservations
     #Reservation.all(:joins => {:participants => :tickets}, :conditions => {:tickets => {:participant_id => id}},:conditions => {:organizer_id => id})
-    return :participated_reservations + :organized_reservations
+    return participated_reservations
   end
   
   

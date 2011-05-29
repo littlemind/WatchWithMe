@@ -3,18 +3,11 @@
 <div id="new-reservation">
 	<h3><%= link_to "New Reservation", new_reservation_path %>
 </div>
-
-<h2>My participated reservations</h2>
-<ul>
-	<% @participated_reservations.each do |r| %>
-		<li><%= link_to r.movie_title, [current_user,r] %> (you have <%= pluralize r.tickets_count, "ticket" %> reserved)
-		</li>
-	<% end %>
-</ul>
-<h2>My organized reservations</h2>
-<ul>
-	<% @organized_reservations.each do |r| %>
-		<li><%= link_to r.movie_title, [current_user,r] %> (total <%= pluralize r.tickets_count, "ticket" %> reserved)
-		</li>
-	<% end %>
-</ul>
+<div class="reservations-list", id="participated-reservations">
+	<h2>My participated reservations</h2>
+	<%= render "reservations_list", :reservations=> @participated_reservations %>
+</div>
+<div class="reservations-list", id="organized-reservations">
+	<h2>My organized reservations</h2>
+	<%= render "reservations_list", :reservations=> @organized_reservations %>
+</div>
