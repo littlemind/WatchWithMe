@@ -4,6 +4,7 @@
     <th>Reserved for</th>
 		<th>@</th>
     <th>Tickets</th>
+		<th>Visible</th>
   </tr>
   <% for reservation in reservations %>
     <tr>
@@ -11,6 +12,7 @@
       <td><%= reservation.reserved_at.to_time %></td>
 			<td><%= reservation.cinema_room %></td>
       <td><%= pluralize reservation.tickets_count, "ticket" %></td>
+			<td><%= reservation.visible_for %></td>
       <% if reservation.organizer == current_user %>
 				<td><%= link_to "Show", [current_user,reservation] %></td>
 	      <td><%= link_to "Edit", edit_reservation_path(reservation) %></td>

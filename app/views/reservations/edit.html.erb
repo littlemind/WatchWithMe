@@ -2,6 +2,10 @@
 
 
 <%= form_for [@reservation] do |f| %>
+	<div class="field">
+		<%= f.label :visible_for_public %><br>
+		<%= f.check_box :visible_for_public, %>
+	</div>
 	<h2>Tickets:</h2>
 	<ol class="fields">
 		<%= f.fields_for :tickets do |builder| %>

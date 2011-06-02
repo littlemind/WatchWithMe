@@ -11,6 +11,8 @@ organized by <%= link_to @organizer.username, @organizer %>
 		<p>
 			<strong>Screening time:</strong> <%= @reservation.reserved_at.strftime '%H:%M' %>
 		</p>
+		<p>
+			<strong>Visible for: </strong> <%= @reservation.visible_for   %>
 </div>
 
 <div id="tickets">

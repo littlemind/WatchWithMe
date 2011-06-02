@@ -1,11 +1,17 @@
 class ReservationsController < ApplicationController
   before_filter :find_user, :only => [:show]
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:show]
   
   def show
     @reservation = Reservation.find(params[:id], :include => [:participants, :organizer,:movie])
-    @tickets = @reservation.tickets
-    @organizer = @reservation.organizer
+    if @reservation.visible_for_user?(current_user)
+      @tickets = @reservation.tickets
+      @organizer = @reservation.organizer
+    else
+      redirect_to @user
+    end
+    
+    
   end
 
   def index
@@ -19,6 +25,7 @@ class ReservationsController < ApplicationController
 
   def new
     @reservation = current_user.organized_reservations.new
+    @reservation.visible_for_public = true
   end
   
   def create
@@ -52,9 +59,7 @@ class ReservationsController < ApplicationController
   private
   
   def find_user
-  #  @user = User.find(:first, :conditions => ["username like ?", params[:id]])
     @user = User.find_user_by_url(params[:user_id])
   end
-  
 
 end
