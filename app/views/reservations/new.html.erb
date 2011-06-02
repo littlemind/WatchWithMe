@@ -9,6 +9,10 @@
 		<%= f.datetime_select :reserved_at ,:discard_year => true, :minute_step => 5%>
 	</div>
 	<div class="field">
+		<%= f.label :visible_for_public, "Public" %><br>
+		<%= f.check_box :visible_for_public %>
+	</div>
+	<div class="field">
 		<%= f.label :tickets %><br>
 		<%= select_tag(:ticket_count, options_for_select(%w{ 1 2 3 4 5 6 7 8 9 10 },6)) %>
 	</div>
