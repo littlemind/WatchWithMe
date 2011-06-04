@@ -8,7 +8,7 @@
   <% for reservation in reservations %>
     <tr>
       <td><%= link_to reservation.movie_title, [current_user,reservation] %></td>
-      <td><%= reservation.reserved_at.to_time %></td>
+      <td><%= reservation.reserved_at.to_s(:long) %></td>
 			<td><%= reservation.cinema_room %></td>
       <td><%= pluralize reservation.tickets_count, "ticket" %></td>
       <% if reservation.organizer == current_user %>
