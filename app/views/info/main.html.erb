@@ -1,6 +1,7 @@
 <h1>Watch<br />With<br />Me</h1>
 <% if !user_signed_in? %>
 	<section>
+		<div> <%= link_to "sign up with facebook", user_omniauth_authorize_path(:facebook) %></div>
 		<div id="sign_up">
 			<%= link_to "Sign up", new_user_registration_path %>
 		</div>

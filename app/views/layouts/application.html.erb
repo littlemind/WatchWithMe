@@ -8,7 +8,7 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-	 <!-- <%= debug params %> -->
+	 <%= debug params %>
 	<!--<%= debug @user %> -->
 	<% if flash[:notice] %>
 		<p class="notice"><%= flash[:notice] %></p>
@@ -16,7 +16,6 @@
 	<% if flash[:error] %>
 		<p class="error"><%= flash[:error] %></p>
 	<% end %>
-	
 	<header>
 		<nav>
 			<% if user_signed_in? %>
