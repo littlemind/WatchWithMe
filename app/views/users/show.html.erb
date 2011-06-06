@@ -17,7 +17,7 @@
 </div>
 <div id="summerize-container">
 	<div id="upcoming-movies">
-		<h2> Upcoming Movies </h2>
+		<h2> Next 3 Upcoming Movies </h2>
 		<ul>
 			<% @upcoming_reservations.each do |r| %>
 				<li><%= link_to r.movie.title, [@user,r] %> (<%= pluralize r.tickets.count, "ticket" %> )</li>
@@ -25,7 +25,7 @@
 		</ul>
 	</div>
 	<div id="history-movies">
-		<h2> Movie History</h2>
+		<h2> Last 3 Participated Movies</h2>
 			<ul>
 				<% @recent_reservations.each do |r| %>
 					<li><%= link_to r.movie.title, [@user,r] %> (<%= pluralize r.tickets.count, "ticket" %> reserved)</li>

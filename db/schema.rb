@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110527171307) do
+ActiveRecord::Schema.define(:version => 20110605192133) do
 
   create_table "cinemas", :force => true do |t|
     t.string   "name"
@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(:version => 20110527171307) do
     t.integer  "cinema_room"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "visible_for_public", :default => true
+    t.datetime "meeting_at"
   end
 
   create_table "tickets", :force => true do |t|
