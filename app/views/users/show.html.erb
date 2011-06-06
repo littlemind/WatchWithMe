@@ -20,7 +20,7 @@
 		<h2> Next 3 Upcoming Movies </h2>
 		<ul>
 			<% @upcoming_reservations.each do |r| %>
-				<li><%= link_to r.movie.title, [@user,r] %> (<%= pluralize r.tickets.count, "ticket" %> )</li>
+				<li><%= link_to r.movie.title, [@user,r] %> (<%= pluralize r.tickets.count, "ticket" %> ) <%= r.visible_for %></li>
 			<% end %>
 		</ul>
 	</div>
@@ -28,7 +28,7 @@
 		<h2> Last 3 Participated Movies</h2>
 			<ul>
 				<% @recent_reservations.each do |r| %>
-					<li><%= link_to r.movie.title, [@user,r] %> (<%= pluralize r.tickets.count, "ticket" %> reserved)</li>
+					<li><%= link_to r.movie.title, [@user,r] %> (<%= pluralize r.tickets.count, "ticket" %> reserved) <%= r.visible_for %></li>
 				<% end %>
 			</ul>
 	</div>
