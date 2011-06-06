@@ -13,8 +13,21 @@ class Reservation < ActiveRecord::Base
   validates_presence_of :reserved_at, :on => :create, :message => "can't be blank, must take place some time"
   validates_presence_of :movie, :on => :create, :message => "can't be blank"
   
-  named_scope :upcoming, :conditions => ["reserved_at > ?", Time.now ]
-  named_scope :recent, lambda { |time_ago| { :conditions => ['reserved_at > ?', time_ago] } }
+  scope :upcoming, lambda { where("reserved_at > ?", Time.now)}
+  scope :recent, lambda { |time_ago| where("reserved_at > ?", time_ago ) }
+  scope :visible, where("visible_for_public = ?", true)
   
+  
+  def visible_for
+    visible_for_public ? "everybody" : "participants only"
+  end
+  
+  def visible_for_user?(user)
+    if visible_for_public
+      return true
+    else
+      participants.include?(user) || user == organizer
+    end
+  end
   
 end
