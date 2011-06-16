@@ -6,11 +6,13 @@ organized by <%= link_to @organizer.username, @organizer %>
 			<strong>Movie title:</strong> <%= @reservation.title %>
 		</p>
 		<p>
-			<strong>Screening date:</strong> <%= @reservation.reserved_at.strftime '%d.%m.%Y' %> (in <%= distance_of_time_in_words( @reservation.reserved_at, Time.now)   %>)
+			<strong>Screening date:</strong> <%= @reservation.reserved_at.strftime '%d.%m.%Y' %> (in <%= distance_of_time_in_words_to_now(@reservation.reserved_at) %>)
 		</p>
 		<p>
 			<strong>Screening time:</strong> <%= @reservation.reserved_at.strftime '%H:%M' %>
 		</p>
+		<p>
+			<strong>Visible for: </strong> <%= @reservation.visible_for   %>
 </div>
 
 <div id="tickets">

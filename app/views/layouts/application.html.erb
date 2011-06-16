@@ -17,7 +17,7 @@
 	<header>
 		<nav>
 			<% if user_signed_in? %>
-				You are signed in as <%= link_to current_user.username, current_user %> | 
+				You are signed in as <%= link_to current_user.username, current_user %>(<%= link_to "edit", edit_user_registration_path %>) | 
 				<%= link_to "My reservations", user_reservations_path(current_user) %> |
 				<%= link_to "Sign out", destroy_user_session_path %>
 			<% else %>

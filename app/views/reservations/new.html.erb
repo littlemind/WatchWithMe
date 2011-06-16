@@ -6,7 +6,15 @@
   </div>
 	<div class="field">
 		<%= f.label :reserved_at %><br>
-		<%= f.datetime_select :reserved_at ,:discard_year => true, :minute_step => 5%>
+		<%= f.datetime_select :reserved_at , :discard_year => true, :minute_step => 5%>
+	</div>
+	<div class="field">
+		<%= f.label :meeting_at%><br>
+		<%= f.time_select :meeting_at, :discard_year => true, :minute_step => 5%><br>
+	</div>
+	<div class="field">
+		<%= f.label :visible_for_public, "Public" %><br>
+		<%= f.check_box :visible_for_public %>
 	</div>
 	<div class="field">
 		<%= f.label :tickets %><br>
