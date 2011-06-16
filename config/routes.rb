@@ -1,5 +1,5 @@
 WatchWithMe::Application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => "users/registrations" }
   resources :movies
   resources :users, :only => :show do
     resources :reservations, :only => [:show, :index]
