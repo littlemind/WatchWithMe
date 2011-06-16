@@ -1,0 +1,21 @@
+<h1>Connected Services</h1>
+<table>
+  <tr>
+    <th>Provider</th>
+    <th>UID</th>
+    <th>Token</th>
+		<th>Secret</th>
+  </tr>
+	<% @authentications.each do |auth| %>
+	  <tr>
+	    <td><%= auth.provider %></td>
+			<td><%= auth.uid %></td>
+			<td><%= auth.token %></td>
+			<td><%= auth.secret %></td>
+			<td><%= link_to "destroy", auth, :confirm => 'Are you sure you want to remove this authentication option?', :method => :delete %></td>
+	  </tr>
+	<% end %>
+</table>
+
+<p><strong>Add additional services</strong></p>
+<%= link_to "Add Twitter" %>

@@ -20,6 +20,8 @@ class User < ActiveRecord::Base
     :order => "reserved_at ASC"
   has_many :tickets, :class_name => "Ticket", 
     :foreign_key => "participant_id"
+  has_many :authentications,
+    :dependent => :destroy
   
   
   validates_uniqueness_of :username, :case_sensitive => false, :allow_blank => false
