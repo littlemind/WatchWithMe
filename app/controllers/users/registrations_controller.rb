@@ -2,7 +2,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   
   # GET /resource/edit
   def edit
-    @user = current_user
+    @authentications = current_user.authentications
     render_with_scope :edit
   end
   

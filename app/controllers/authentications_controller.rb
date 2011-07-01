@@ -7,7 +7,7 @@ class AuthenticationsController < ApplicationController
     @authentication = current_user.authentications.find(params[:id])
     @authentication.destroy
     
-    redirect_to authentications_url
+    redirect_to edit_user_registration_path
   end
 
 end
