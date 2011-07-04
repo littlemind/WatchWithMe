@@ -8,31 +8,58 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-	<%= debug params %>
-	<!--<%= debug @user %> -->
-	<% if flash[:notice] %>
-		<p class="notice"><%= flash[:notice] %></p>
-	<% end %>
-	<% if flash[:error] %>
-		<p class="error"><%= flash[:error] %></p>
-	<% end %>
-	
 	<header>
-		<nav>
-			<% if user_signed_in? %>
-				You are signed in as <%= link_to current_user.username, current_user %>(<%= link_to "edit", edit_user_registration_path(current_user) %>) | 
-				<%= link_to "My reservations", user_reservations_path(current_user) %> |
-				<%= link_to "Sign out", destroy_user_session_path %>
-			<% else %>
-				You are not signed in | <%= link_to 'Sign in', new_user_session_path %> | <%= link_to "Sign up a new account", new_user_registration_path %>
-			<% end %>
-		</nav>
+		<div id="top-bar-outer">
+			<div id="top-bar" class="container_12">
+				<div class="prefix_1 suffix_1">
+					<div class="dropdown-outer grid_10">
+						<div id="notifications" class="grid_5">
+							<h3>
+							<% if flash[:notice] %>
+								<p class="notice"><%= flash[:notice] %></p>
+							<% end %>
+							<% if flash[:error] %>
+								<p class="error"><%= flash[:error] %></p>
+							<% end %>
+							</h3>
+						</div>
+						
+						<% if user_signed_in? %>
+							<span class="user-frame">
+								<div id="username">
+									<h3><%= link_to current_user.username, current_user %> <%= link_to_function("▾","dropdown()") %></h3>
+								</div>
+								<div class="dropdown">
+									<ul>
+										<li><%= link_to "Home", root_path %></li>
+										<li><%= link_to "Settings", edit_user_registration_path(current_user) %></li>
+										<li><%= link_to "My reservations", user_reservations_path(current_user) %></li>
+										<li><%= link_to "Sign out", destroy_user_session_path %></li>
+									</ul>
+								</div>
+							</span>
+						<% else %>
+							<div id="not-signed-in">
+								<h3><%= link_to 'Sign in', new_user_session_path %> | <%= link_to "Sign up a new account", new_user_registration_path %></h3>
+							</div>
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</div>
 	</header>
-	<div id="container">
-		<%= yield %>
+	<div id="main" class="container_12 ">
+		<div class="prefix_1 suffix_1">
+			<%= yield %>
+			<div class="clearfix"></div>
+			<footer>
+				<div class="grid_10">
+					This is where the foot stands.
+				</div>
+				
+			</footer>
+		</div>
 	</div>
-	<footer>
-		This is where the foot stands.
-	</footer>
+	
 </body>
 </html>

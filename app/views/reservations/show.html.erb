@@ -1,43 +1,67 @@
-<h1>Reservations for <%= @reservation.title %></h1>
-organized by <%= link_to @organizer.username, @organizer %>
 <div id="reservation-details">
-	<%= image_tag "http://lorempixum.com/g/300/450/" %>
+	<div id="movie_image" class="grid_3">
+		<%= image_tag "http://lorempixum.com/g/214/317/" %>
+	</div>
+	<div id="description" class="grid_6 prefix_1">
 		<p>
-			<strong>Movie title:</strong> <%= @reservation.title %>
+			Watch<br>
+			<span class="infos" id="movie-title"><%= @reservation.title %></span><br>
+			with <span class="infos"><%= @organizer.username %></span>
+			<% if @organizer == current_user %>
+				(<%= link_to "edit", edit_reservation_path %>) 
+			<% end %>
 		</p>
 		<p>
-			<strong>Screening date:</strong> <%= @reservation.reserved_at.strftime '%d.%m.%Y' %> (in <%= distance_of_time_in_words_to_now(@reservation.reserved_at) %>)
+			on <span class="infos"><%= @reservation.reserved_at.strftime '%A, %b %e, %Y - %H:%M' %></span>
 		</p>
 		<p>
-			<strong>Screening time:</strong> <%= @reservation.reserved_at.strftime '%H:%M' %>
-		</p>
-		<p>
-			<strong>Visible for: </strong> <%= @reservation.visible_for   %>
+			at <span class="infos">Cinema </span>
+		</p>		
+	</div>
+
+</div>
+<div class="clearfix">
+	
 </div>
 
 <div id="tickets">
-	<h2>Tickets</h2>
-	<ol>
-		<% for ticket in @reservation.tickets %>
-			<li>
-				<div id="Ticket">
-					Ticket | 
-					<% if ticket.participant %>
-						<%= link_to ticket.participant.username, ticket.participant %> 
-						<% if current_user == ticket.participant %>
-							(<%= link_to "cancel", ticket, :method => :delete %>)
+	<h2 class="grid_4">Tickets:</h2>
+	<div class="ticket-list grid_6">
+		<ul>
+			<% for ticket in @reservation.tickets.reserved %>
+				<li>
+					<div id="reserved">
+						<% if ticket.participant %>
+							<span class="username grid_2">
+								<%= link_to ticket.participant.username, ticket.participant %> 
+							</span>
+							
+							<% if current_user == ticket.participant %>
+								<span id="delete-ticket-button"><%= link_to "delete me", ticket, :method => :delete %></span>
+							<% end %>
 						<% end %>
-					<% else %>
-						not reserved
-						(<%= link_to "reserve", tickets_path(:ticket_id => ticket), :action => "create", :controller => "tickets", :method => :post %>)
-					<% end %>
-				</div>
-			</li>
-		<% end %>
-	</ol>
-</div>
-
-<% if @organizer == current_user %>
-	<%= link_to "Edit", edit_reservation_path %> |
+					</div>
+				</li>
+			<% end %>
+			
+			<% unless @reservation.tickets.free.empty? %>
+				<li>
+					<div id="free">
+						<span class="username grid_2">
+							-- ??? --
+						</span>
+						<span id="create-ticket-button">
+							<%= link_to "count me in", tickets_path(:ticket_id => @reservation.tickets.free.first), :action => "create", :controller => "tickets", :method => :post %>
+						</span>
+						<span id="batch">
+							<%= @reservation.tickets.free.count %> left
+						</span>
+					</div>
+				</li>
+			<% end %>
+				
+			
+		</ul>
+	</div>
 	
-<% end %>
+</div>

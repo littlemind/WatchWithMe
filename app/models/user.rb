@@ -24,6 +24,7 @@ class User < ActiveRecord::Base
   
   validates_uniqueness_of :username, :case_sensitive => false, :allow_blank => false
   validates_presence_of :username, :message => "can't be blank"
+  
   def to_param #overridden
     username
   end
