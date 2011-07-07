@@ -18,50 +18,36 @@
 			at <span class="infos">Cinema </span>
 		</p>		
 	</div>
-
 </div>
-<div class="clearfix">
-	
-</div>
-
+<div class="clearfix"></div>
 <div id="tickets">
 	<h2 class="grid_4">Tickets:</h2>
-	<div class="ticket-list grid_6">
-		<ul>
-			<% for ticket in @reservation.tickets.reserved %>
-				<li>
-					<div id="reserved">
-						<% if ticket.participant %>
-							<span class="username grid_2">
-								<%= link_to ticket.participant.username, ticket.participant %> 
-							</span>
-							
-							<% if current_user == ticket.participant %>
-								<span id="delete-ticket-button"><%= link_to "delete me", ticket, :method => :delete %></span>
-							<% end %>
-						<% end %>
-					</div>
-				</li>
-			<% end %>
-			
-			<% unless @reservation.tickets.free.empty? %>
-				<li>
-					<div id="free">
-						<span class="username grid_2">
-							-- ??? --
-						</span>
-						<span id="create-ticket-button">
-							<%= link_to "count me in", tickets_path(:ticket_id => @reservation.tickets.free.first), :action => "create", :controller => "tickets", :method => :post %>
-						</span>
-						<span id="batch">
-							<%= @reservation.tickets.free.count %> left
-						</span>
-					</div>
-				</li>
-			<% end %>
-				
-			
-		</ul>
-	</div>
-	
+	<ul class="ticket-list grid_6">
+		<% for ticket in @reservation.tickets.reserved %>
+			<li id="reserved">
+				<% if ticket.participant %>
+					<span class="username grid_2">
+						<%= link_to ticket.participant.username, ticket.participant %> 
+					</span>
+					
+					<% if current_user == ticket.participant %>
+						<span id="delete-ticket-button"><%= link_to "delete me", ticket, :method => :delete %></span>
+					<% end %>
+				<% end %>
+			</li>
+		<% end %>
+		<% unless @reservation.tickets.free.empty? %>
+			<li id="free">
+				<span class="username grid_2">
+					-- ??? --
+				</span>
+				<span id="create-ticket-button">
+					<%= link_to "count me in", tickets_path(:ticket_id => @reservation.tickets.free.first), :action => "create", :controller => "tickets", :method => :post %>
+				</span>
+				<span id="batch">
+					<%= @reservation.tickets.free.count %> left
+				</span>
+			</li>
+		<% end %>
+	</ul>
 </div>
