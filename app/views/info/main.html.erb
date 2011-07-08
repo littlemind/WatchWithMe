@@ -27,8 +27,12 @@
 <div id="recently" class="grid_10">
 	<h2>Recently Watched With Someone</h2>
 	<ul id="recently-list">
-		<% for reservation in Reservation.visible.order(:reserved_at)[-5..-1] %>
-			<li> ☆ <%= link_to reservation.title, [reservation.organizer , reservation] %> @ Cinecare Aachen « <%= link_to reservation.organizer.username, reservation.organizer %></li>
+		<% if Reservation.visible.count >= 5 %>
+			<% for reservation in Reservation.visible.order(:reserved_at)[-5..-1] %>
+				<li> ☆ <%= link_to reservation.title, [reservation.organizer , reservation] %> @ Cinecare Aachen « <%= link_to reservation.organizer.username, reservation.organizer %></li>
+			<% end %>
+		<% else %>
+			<li>Sorry, not enough reservations yet</li>
 		<% end %>
 	</ul>
 </div>
