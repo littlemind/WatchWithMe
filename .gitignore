@@ -2,5 +2,5 @@
 db/*.sqlite3
 log/*.log
 tmp/
-public/stylesheets/.sass-cache
+.sass-cache
 config/initializers/devise.rb
