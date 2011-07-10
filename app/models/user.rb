@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :username, :email, :password, :password_confirmation, :remember_me
+  attr_accessible :username, :email, :password, :password_confirmation, :remember_me, :has_local_pw
   
   has_many :organized_reservations, 
     :class_name => "Reservation", 
@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
   
   validates_uniqueness_of :username, :case_sensitive => false, :allow_blank => false
   validates_presence_of :username, :message => "can't be blank"
+  
   def to_param #overridden
     username
   end
@@ -43,8 +44,12 @@ class User < ActiveRecord::Base
     data = access_token['extra']['user_hash']
     if user = User.find_by_email(data["email"])
       user
-    else # Create a user with a stub password. 
-      User.create!(:email => data["email"], :password => Devise.friendly_token[0,20], :username => data["username"]) 
+    else
+      if User.find_by_username(data["username"])# Create a user with a stub password. 
+        User.create!(:email => data["email"], :password => Devise.friendly_token[0,20], :username => data["username"] << data["id"], :has_local_pw => :false)
+      else
+        User.create!(:email => data["email"], :password => Devise.friendly_token[0,20], :username => data["username"], :has_local_pw => :false)
+      end
     end
   end
   
@@ -53,6 +58,14 @@ class User < ActiveRecord::Base
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["user_hash"]
         user.email = data["email"]
       end
+    end
+  end
+  
+  def created_through_facebook?
+    if authentication = self.authentications.find_by_provider("facebook")
+      self.created_at < authentication.created_at
+    else
+      false
     end
   end
   
