@@ -1,20 +1,11 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
-<<<<<<< HEAD
-  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :username, :email, :password, :password_confirmation, :remember_me
-=======
   # :token_authenticatable, :encryptable, :confirmable, :lockable and :timeoutable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :username, :email, :password, :password_confirmation, :remember_me, :has_local_pw
->>>>>>> OmniAuth
   
   has_many :organized_reservations, 
     :class_name => "Reservation", 
@@ -29,19 +20,14 @@ class User < ActiveRecord::Base
     :order => "reserved_at ASC"
   has_many :tickets, :class_name => "Ticket", 
     :foreign_key => "participant_id"
-<<<<<<< HEAD
-=======
+
   has_many :authentications,
     :dependent => :destroy
->>>>>>> OmniAuth
-  
+
   
   validates_uniqueness_of :username, :case_sensitive => false, :allow_blank => false
   validates_presence_of :username, :message => "can't be blank"
-<<<<<<< HEAD
-=======
   validates_length_of :username, :maximum => 20, :minimum => 4
->>>>>>> OmniAuth
   
   def to_param #overridden
     username
@@ -56,8 +42,6 @@ class User < ActiveRecord::Base
     return participated_reservations
   end
   
-<<<<<<< HEAD
-=======
   def self.find_for_facebook_oauth(access_token, signed_in_resource=nil)
     data = access_token['extra']['user_hash']
     if user = User.find_by_email(data["email"])
@@ -83,7 +67,5 @@ class User < ActiveRecord::Base
       false
     end
   end
-  
->>>>>>> OmniAuth
-  
+
 end

@@ -10,9 +10,6 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20110605192133) do
-=======
 ActiveRecord::Schema.define(:version => 20110710172337) do
 
   create_table "authentications", :force => true do |t|
@@ -24,7 +21,6 @@ ActiveRecord::Schema.define(:version => 20110710172337) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
->>>>>>> OmniAuth
 
   create_table "cinemas", :force => true do |t|
     t.string   "name"
@@ -63,13 +59,8 @@ ActiveRecord::Schema.define(:version => 20110710172337) do
   end
 
   create_table "users", :force => true do |t|
-<<<<<<< HEAD
-    t.string   "email",                                 :default => "", :null => false
-    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
-=======
     t.string   "email",                                 :default => "",   :null => false
     t.string   "encrypted_password",     :limit => 128, :default => "",   :null => false
->>>>>>> OmniAuth
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -81,10 +72,7 @@ ActiveRecord::Schema.define(:version => 20110710172337) do
     t.string   "username"
     t.datetime "created_at"
     t.datetime "updated_at"
-<<<<<<< HEAD
-=======
     t.boolean  "has_local_pw",                          :default => true
->>>>>>> OmniAuth
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
