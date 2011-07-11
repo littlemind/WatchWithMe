@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
   
   validates_uniqueness_of :username, :case_sensitive => false, :allow_blank => false
   validates_presence_of :username, :message => "can't be blank"
+  validates_length_of :username, :maximum => 20, :minimum => 4
   
   def to_param #overridden
     username
@@ -45,11 +46,8 @@ class User < ActiveRecord::Base
     if user = User.find_by_email(data["email"])
       user
     else
-      if User.find_by_username(data["username"])# Create a user with a stub password. 
-        User.create!(:email => data["email"], :password => Devise.friendly_token[0,20], :username => data["username"] << data["id"], :has_local_pw => :false)
-      else
-        User.create!(:email => data["email"], :password => Devise.friendly_token[0,20], :username => data["username"], :has_local_pw => :false)
-      end
+      username = data["username"] << (User.find_by_username(data["username"]) ? (data["id"])[0,20] : "")
+      User.create!(:email => data["email"], :password => Devise.friendly_token[0,20], :username => username[0,20], :has_local_pw => :false)
     end
   end
   

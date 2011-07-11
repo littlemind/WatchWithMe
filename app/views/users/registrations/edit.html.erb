@@ -36,10 +36,8 @@
 			<p><%= "You have to assign a password to your account if you want to remove this authentication option." if !current_user.has_local_pw %></p>
 			</div>
 		<% end %>
-		
-		<div id="name">
-			
-		</div>
+		<%= link_to "Link your account to Facebook", user_omniauth_authorize_path(:facebook) unless current_user.authentications.find_by_provider("facebook") %>
+		<br />
 </div>
 
 <h3>Cancel my account</h3>
