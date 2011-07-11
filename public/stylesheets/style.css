@@ -136,6 +136,7 @@ header {
   font-size: 18px; }
 #top-bar .dropdown {
   text-align: left;
+  font-size: 14px;
   visibility: hidden;
   z-index: 1;
   margin-top: 5px;
