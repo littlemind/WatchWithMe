@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div id="reservation-details">
 	<div id="movie_image" class="grid_3">
 		<%= image_tag "http://lorempixum.com/g/214/317/" %>
@@ -51,3 +52,48 @@
 		<% end %>
 	</ul>
 </div>
+=======
+<h1>Reservations for <%= @reservation.title %></h1>
+organized by <%= link_to @organizer.username, @organizer %>
+<div id="reservation-details">
+	<%= image_tag "http://lorempixum.com/g/300/450/" %>
+		<p>
+			<strong>Movie title:</strong> <%= @reservation.title %>
+		</p>
+		<p>
+			<strong>Screening date:</strong> <%= @reservation.reserved_at.strftime '%d.%m.%Y' %> (in <%= distance_of_time_in_words_to_now(@reservation.reserved_at) %>)
+		</p>
+		<p>
+			<strong>Screening time:</strong> <%= @reservation.reserved_at.strftime '%H:%M' %>
+		</p>
+		<p>
+			<strong>Visible for: </strong> <%= @reservation.visible_for   %>
+</div>
+
+<div id="tickets">
+	<h2>Tickets</h2>
+	<ol>
+		<% for ticket in @reservation.tickets %>
+			<li>
+				<div id="Ticket">
+					Ticket | 
+					<% if ticket.participant %>
+						<%= link_to ticket.participant.username, ticket.participant %> 
+						<% if current_user == ticket.participant %>
+							(<%= link_to "cancel", ticket, :method => :delete %>)
+						<% end %>
+					<% else %>
+						not reserved
+						(<%= link_to "reserve", tickets_path(:ticket_id => ticket), :action => "create", :controller => "tickets", :method => :post %>)
+					<% end %>
+				</div>
+			</li>
+		<% end %>
+	</ol>
+</div>
+
+<% if @organizer == current_user %>
+	<%= link_to "Edit", edit_reservation_path %> |
+	
+<% end %>
+>>>>>>> OmniAuth

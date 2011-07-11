@@ -1,5 +1,10 @@
 WatchWithMe::Application.routes.draw do
-  devise_for :users
+
+  devise_for :users, :controllers => { :registrations => "users/registrations", :omniauth_callbacks => "users/omniauth_callbacks" } do
+    get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
+  end
+  resources :authentications
+  
   resources :movies
   resources :users, :only => :show do
     resources :reservations, :only => [:show, :index]

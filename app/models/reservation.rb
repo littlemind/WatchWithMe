@@ -14,7 +14,11 @@ class Reservation < ActiveRecord::Base
   validates_presence_of :movie, :on => :create, :message => "can't be blank"
   
   scope :upcoming, lambda { where("reserved_at > ?", Time.now)}
+<<<<<<< HEAD
   scope :recent, lambda { |time_ago = 4.week.ago| where(:reserved_at => time_ago..Time.now ) }
+=======
+  scope :recent, lambda { |time_ago| where("reserved_at > ?", time_ago ) }
+>>>>>>> OmniAuth
   scope :visible, where("visible_for_public = ?", true)
   
   

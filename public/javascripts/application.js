@@ -16,4 +16,5 @@ function add_fields(link, association, content) {
 
 function dropdown(){
 	$(".dropdown").toggleClass("droped");	
+
 }

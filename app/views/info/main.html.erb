@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div id="headline" class="grid_10">
 	<h1>WatchWithMe</h1>
 	<h2>Manage Movie Reservations with Your Friends</h2>
@@ -15,12 +16,19 @@
 	<% else %>
 		<h2>Sign Up</h2>
 		<p>an account to create & manage your reservations</p>
+=======
+<h1>Watch<br />With<br />Me</h1>
+<% if !user_signed_in? %>
+	<section>
+		<div> <%= link_to "sign up with facebook", user_omniauth_authorize_path(:facebook) %></div>
+>>>>>>> OmniAuth
 		<div id="sign_up">
 			<%= link_to "Sign up", new_user_registration_path %>
 		</div>
 		<div id="Sign in">
 			<%= link_to "Sign in", new_user_session_path %>
 		</div>
+<<<<<<< HEAD
 		<p>or use facebook</p>
 	<% end %>
 </div>
@@ -36,3 +44,13 @@
 		<% end %>
 	</ul>
 </div>
+=======
+	</section>
+<% end %>
+<section id="about">
+	<h2>What is WatchWithMe</h2>
+	<div class="text">
+		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+	</div>
+</section>
+>>>>>>> OmniAuth

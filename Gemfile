@@ -30,8 +30,13 @@ gem 'sqlite3'
 #   gem 'webrat'
 # end
 
+
+gem 'sass'
+
 gem 'devise'
-gem "nifty-generators", :group => :development
-gem "hirb", :group => :development
-gem "ruby-tmdb"
+gem 'nifty-generators', :group => :development
+gem 'hirb', :group => :development
+gem 'ruby-tmdb'
 gem 'jquery-rails', '>= 1.0.3'
+gem 'omniauth'
+

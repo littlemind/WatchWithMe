@@ -1,0 +1,47 @@
+<h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <p><%= f.label :username %><br />
+  <%= f.email_field :username %></p>
+	
+  <p><%= f.label :email %><br />
+  <%= f.email_field :email %></p>
+  
+	<p><%= "You can assign a password to your account (necessary if you want this account without facebook authentication)" if !current_user.has_local_pw %></p>
+  <p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+  <%= f.password_field :password %></p>
+
+  <p><%= f.label :password_confirmation %><br />
+  <%= f.password_field :password_confirmation %></p>
+
+	<% if current_user.has_local_pw %>
+	  <p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+	  <%= f.password_field :current_password %></p>
+	<% end %>
+	
+  <p><%= f.submit "Update" %></p>
+<% end %>
+
+
+<div class="authentications">
+	<h3>Social Media</h3>
+		<% for authentication in current_user.authentications %>
+			<div class="authentication" >
+		  	<%= image_tag "#{authentication.provider}_64.png", :size => "64x64" %>
+			  <div class="provider"><%= authentication.provider.titleize %></div>
+			  <div class="uid"><%= authentication.uid %></div>
+			<%= link_to "X", authentication, :confirm => 'Are you sure you want to remove this authentication option?', :method => :delete, :class => "remove"  %>
+			<p><%= "You have to assign a password to your account if you want to remove this authentication option." if !current_user.has_local_pw %></p>
+			</div>
+		<% end %>
+		<%= link_to "Link your account to Facebook", user_omniauth_authorize_path(:facebook) unless current_user.authentications.find_by_provider("facebook") %>
+		<br />
+</div>
+
+<h3>Cancel my account</h3>
+
+<p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :confirm => "Are you sure?", :method => :delete %>.</p>
+
+<%= link_to "Back", :back %>

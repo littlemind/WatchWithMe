@@ -1,6 +1,13 @@
 <li class="fields">
+<<<<<<< HEAD
 	<div id="reserved">
 		<%= f.collection_select(:participant_id, User.all, :id, :username, :include_blank => true) %>
 		<%= link_to_remove_fields("remove",f) %>
 	</div>
+=======
+	Ticket for
+	<%= f.collection_select(:participant_id, User.all, :id, :username, :include_blank => true) %>
+	<%= link_to_remove_fields("remove",f) %>
+	<br>
+>>>>>>> OmniAuth
 </li>
